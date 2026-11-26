@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0b0b">
+<link rel="icon" href="img/favicon.png">
+<meta property="og:title" content="Medina · Restaurant marocain à Gaillac">
+<meta property="og:description" content="Couscous maison, tajines, grillades et brunch marocain, place du Griffoul à Gaillac.">
+<meta property="og:image" content="img/hero-poster.jpg">
+<title>Medina Gaillac</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Medina, restaurant marocain à Gaillac, place du Griffoul. Couscous maison, tajines, grillades, pastilla et brunch marocain du vendredi au dimanche.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap">
+<style>
+/* Layout : une nuit au riad. Ouverture plein cadre au scroll (le couvercle du tajine se lève),
+   puis la carte comme un livret noir et cuivre, et les infos pratiques toujours à un pouce. */
+:root{
+  --noir:#0b0b0b;        /* fond du logo */
+  --nuit:#111311;        /* surfaces */
+  --vert:#1d3b2f;        /* vert de la charte */
+  --emeraude:#38764d;    /* losanges du logo */
+  --cuivre:#d29a6c;      /* M du logo */
+  --cuivre-clair:#eebd93;
+  --creme:#f3ede4;       /* fond clair de la charte */
+  --texte:#e9e2d7;
+  --doux:#a89f92;
+  --trait:rgba(210,154,108,.28);
+  --grad-cuivre:linear-gradient(100deg,#9a6038 0%,#e7b588 38%,#f6d3ad 50%,#c88a5c 66%,#8f5833 100%);
+  --f-display:"Cinzel","Trajan Pro",Georgia,serif;
+  --f-italique:"Cormorant Garamond",Georgia,serif;
+  --f-texte:"Jost","Helvetica Neue",Arial,sans-serif;
+  --gutter:max(16px,env(safe-area-inset-left,0px));
+  --gutter-r:max(16px,env(safe-area-inset-right,0px));
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--noir)}
+body{background:var(--noir);color:var(--texte);font:400 16px/1.6 var(--f-texte);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cuivre-clair);outline-offset:3px}
+h1,h2,h3{font-family:var(--f-display);font-weight:500;letter-spacing:.14em;text-wrap:balance;margin:0}
+p{margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter-r)}
+.cuivre{background:var(--grad-cuivre);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{font:500 .74rem/1 var(--f-texte);letter-spacing:.32em;text-transform:uppercase;color:var(--cuivre);display:flex;align-items:center;gap:.8rem}
+.eyebrow::before,.eyebrow::after{content:"";height:1px;width:28px;background:var(--cuivre);opacity:.6}
+.eyebrow.left::before{display:none}
+.italique{font-family:var(--f-italique);font-style:italic;font-weight:400}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-height:48px;padding:0 1.4rem;border-radius:2px;font:500 .8rem/1 var(--f-texte);letter-spacing:.18em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:1px solid var(--cuivre);transition:background .25s,color .25s,transform .25s}
+.btn.plein{background:var(--grad-cuivre);color:#1a0f08;border-color:transparent}
+.btn.plein:hover{transform:translateY(-1px);filter:brightness(1.06)}
+.btn.ligne{background:transparent;color:var(--cuivre-clair)}
+.btn.ligne:hover{background:rgba(210,154,108,.12)}
+.btn svg{width:16px;height:16px;flex:none}
+
+/* Losange signature (repris du logo) */
+.losange{position:relative;display:inline-grid;place-items:center;width:44px;height:44px;flex:none}
+.losange::before{content:"";position:absolute;inset:7px;border:1px solid var(--cuivre);transform:rotate(45deg)}
+.losange i{position:absolute;width:5px;height:5px;background:var(--emeraude);transform:rotate(45deg)}
+.losange i:nth-child(1){top:1px}.losange i:nth-child(2){bottom:1px}.losange i:nth-child(3){left:1px}.losange i:nth-child(4){right:1px}
+.losange b{font:600 17px/1 var(--f-display);background:var(--grad-cuivre);-webkit-background-clip:text;background-clip:text;color:transparent;position:relative}
+
+/* En-tête */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--noir)}
+.top{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;transition:background .35s,border-color .35s}
+.top.solide{background:rgba(11,11,11,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--trait)}
+.top .wrap{display:flex;align-items:center;gap:1.2rem;height:68px}
+.marque{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+.marque span{font:600 1.05rem/1 var(--f-display);letter-spacing:.34em}
+.marque small{display:block;font:500 .56rem/1 var(--f-texte);letter-spacing:.3em;color:var(--doux);margin-top:.35rem}
+.nav{margin-left:auto;display:flex;gap:1.6rem;align-items:center}
+.nav a{font:500 .76rem/1 var(--f-texte);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--texte);opacity:.85}
+.nav a:hover{color:var(--cuivre-clair);opacity:1}
+.nav .btn{min-height:40px;padding:0 1rem}
+@media (max-width:860px){.nav a:not(.btn){display:none}}
+@media (max-width:520px){.nav{display:none}}
+
+/* Hero au scroll */
+.hero{position:relative;height:260vh;height:260svh}
+.hero-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--noir)}
+.hero canvas,.hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .voile{position:absolute;inset:0;background:
+  radial-gradient(120% 80% at 50% 45%,rgba(11,11,11,0) 30%,rgba(11,11,11,.55) 75%,rgba(11,11,11,.9) 100%),
+  linear-gradient(180deg,rgba(11,11,11,.7) 0%,rgba(11,11,11,0) 26%,rgba(11,11,11,0) 60%,rgba(11,11,11,.92) 100%)}
+.hero .dim{position:absolute;inset:0;background:radial-gradient(90% 70% at 50% 52%,rgba(11,11,11,.72),rgba(11,11,11,.35) 70%,rgba(11,11,11,.2));pointer-events:none}
+.hero-txt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:90px var(--gutter-r) 70px var(--gutter);gap:1.2rem}
+.hero-logo{width:min(150px,30vw);height:auto;opacity:.98}
+.hero h1{text-shadow:0 2px 30px rgba(0,0,0,.5);font-size:clamp(2.6rem,9vw,6.4rem);font-weight:500;letter-spacing:.3em;margin-right:-.3em;line-height:1}
+.hero .sous{display:flex;align-items:center;gap:.9rem;font:500 clamp(.68rem,1.6vw,.85rem)/1 var(--f-texte);letter-spacing:.36em;text-transform:uppercase;color:var(--cuivre-clair)}
+.hero .sous::before,.hero .sous::after{content:"";width:46px;height:1px;background:linear-gradient(90deg,transparent,var(--cuivre))}
+.hero .sous::after{transform:scaleX(-1)}
+@media (max-width:480px){.hero .sous{letter-spacing:.2em}.hero .sous::before,.hero .sous::after{width:22px}}
+.hero .accroche{font-family:var(--f-italique);font-style:italic;font-size:clamp(1.25rem,2.8vw,1.75rem);color:var(--creme);max-width:32ch;line-height:1.35}
+.hero .ctas{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin-top:.6rem}
+.hero .fin{position:absolute;left:0;right:0;bottom:12vh;text-align:center;opacity:0;padding:0 var(--gutter-r) 0 var(--gutter)}
+.hero .fin p{font-family:var(--f-italique);font-style:italic;font-size:clamp(1.6rem,4vw,2.8rem);color:var(--creme)}
+.hero .fin span{display:block;margin-top:.6rem;font:500 .74rem/1 var(--f-texte);letter-spacing:.3em;text-transform:uppercase;color:var(--cuivre)}
+.scroll-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;font:500 .62rem/1 var(--f-texte);letter-spacing:.3em;text-transform:uppercase;color:var(--doux)}
+.scroll-hint i{width:1px;height:34px;background:linear-gradient(var(--cuivre),transparent);animation:goutte 2s ease-in-out infinite}
+@keyframes goutte{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.progress{position:absolute;left:var(--gutter);right:var(--gutter-r);bottom:0;height:2px;background:rgba(255,255,255,.08)}
+.progress b{display:block;height:100%;width:0;background:var(--grad-cuivre)}
+
+/* Bandeau infos express */
+.express{position:relative;z-index:2;margin-top:-1px;background:var(--vert);border-top:1px solid var(--trait);border-bottom:1px solid var(--trait)}
+.express .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.express .it{padding:1.4rem 1.2rem;display:flex;gap:.9rem;align-items:flex-start;border-left:1px solid rgba(243,237,228,.1);min-width:0;text-decoration:none}
+.express .it:first-child{border-left:0;padding-left:0}
+.express svg{width:22px;height:22px;color:var(--cuivre-clair);flex:none;margin-top:2px}
+.express h3{font:500 .66rem/1 var(--f-texte);letter-spacing:.26em;text-transform:uppercase;color:var(--cuivre-clair);margin-bottom:.45rem}
+.express p{font-size:.95rem;line-height:1.4;color:var(--creme)}
+.express p small{color:rgba(243,237,228,.7);font-size:.82rem}
+.ouvert{display:inline-flex;align-items:center;gap:.4rem}
+.ouvert::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--pastille,#7fc59a);box-shadow:0 0 0 3px rgba(127,197,154,.18)}
+@media (max-width:900px){.express .wrap{grid-template-columns:1fr 1fr}.express .it{padding:1.1rem .9rem}.express .it:nth-child(3){border-left:0;padding-left:0}.express .it:nth-child(n+3){border-top:1px solid rgba(243,237,228,.1)}}
+@media (max-width:420px){.express .it{padding:1rem .6rem}.express p{font-size:.88rem}}
+
+/* Sections */
+section{position:relative}
+.sec{padding-block:clamp(4.5rem,10vw,8rem)}
+.tete{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1rem;margin-bottom:clamp(2.4rem,5vw,3.6rem)}
+.tete h2{font-size:clamp(1.9rem,4.6vw,3.2rem);letter-spacing:.16em}
+.tete p{max-width:56ch;color:var(--doux)}
+
+/* Histoire */
+.histoire .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,6vw,5rem);align-items:center}
+.histoire .txt{display:flex;flex-direction:column;gap:1.3rem;min-width:0}
+.histoire h2{font-size:clamp(1.8rem,4vw,2.9rem);line-height:1.2}
+.histoire .lead{font-family:var(--f-italique);font-style:italic;font-size:clamp(1.3rem,2.4vw,1.6rem);color:var(--creme);line-height:1.4}
+.histoire p{color:var(--doux);max-width:54ch}
+.chiffres{display:flex;gap:2.2rem;flex-wrap:wrap;margin-top:.6rem}
+.chiffres div{display:flex;flex-direction:column;gap:.35rem}
+.chiffres b{font:500 1.9rem/1 var(--f-display);letter-spacing:.06em}
+.chiffres span{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--doux)}
+.histoire .gravure{position:relative;min-width:0}
+.histoire .gravure img{width:100%;height:auto;filter:drop-shadow(0 0 40px rgba(210,154,108,.12))}
+@media (max-width:820px){.histoire .wrap{grid-template-columns:1fr}.histoire .gravure{max-width:420px;margin:0 auto;order:-1}}
+
+/* Signatures */
+.signatures{background:linear-gradient(180deg,var(--noir),#0e1511 50%,var(--noir))}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,1fr);gap:1.2rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:1rem;scrollbar-width:thin;scrollbar-color:var(--cuivre) transparent}
+@media (min-width:1100px){.rail{grid-auto-flow:row;grid-template-columns:repeat(4,1fr);overflow:visible}.plat h3{font-size:1.02rem}}
+.plat{scroll-snap-align:start;position:relative;display:flex;flex-direction:column;background:var(--nuit);border:1px solid rgba(210,154,108,.16);min-width:0}
+.plat figure{margin:0;aspect-ratio:4/5;overflow:hidden;position:relative}
+.plat img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.plat:hover img{transform:scale(1.05)}
+.plat figure::after{content:"";position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(transparent,rgba(11,11,11,.85))}
+.plat .info{position:absolute;left:0;right:0;bottom:0;padding:1.2rem 1.2rem 1.3rem;display:flex;flex-direction:column;gap:.35rem;z-index:1}
+.plat .cat{font-size:.64rem;letter-spacing:.28em;text-transform:uppercase;color:var(--cuivre-clair)}
+.plat h3{font-size:1.15rem;letter-spacing:.1em;color:var(--creme)}
+.plat .ligne{display:flex;justify-content:space-between;gap:1rem;align-items:baseline}
+.plat .ligne p{font-size:.86rem;color:rgba(243,237,228,.72);line-height:1.4}
+.plat .prix{font:500 1.05rem/1 var(--f-display);white-space:nowrap}
+.rail-hint{display:none;margin-top:.4rem;text-align:center;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--doux)}
+@media (max-width:1099px){.rail-hint{display:block}}
+
+/* La carte */
+.carte{background:var(--noir)}
+.carte::before{content:"";position:absolute;inset:0;background:url('img/skyline.webp') no-repeat center bottom/min(1100px,140%) auto;opacity:.16;pointer-events:none}
+.onglets{position:sticky;top:calc(env(safe-area-inset-top,0px) + 68px);z-index:20;background:rgba(11,11,11,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-top:1px solid var(--trait);border-bottom:1px solid var(--trait);margin-bottom:2.4rem}
+.onglets .wrap{display:flex;gap:.3rem;overflow-x:auto;scrollbar-width:none}
+.onglets .wrap::-webkit-scrollbar{display:none}
+.onglets button{flex:none;background:none;border:0;color:var(--doux);font:500 .74rem/1 var(--f-texte);letter-spacing:.2em;text-transform:uppercase;padding:1.1rem .9rem;cursor:pointer;position:relative;min-height:48px}
+.onglets button[aria-selected="true"]{color:var(--cuivre-clair)}
+.onglets button[aria-selected="true"]::after{content:"";position:absolute;left:.9rem;right:.9rem;bottom:-1px;height:2px;background:var(--grad-cuivre)}
+.livret{position:relative;max-width:980px;margin:0 auto;border:1px solid var(--trait);padding:clamp(1.6rem,5vw,3.4rem);background:linear-gradient(180deg,rgba(29,59,47,.28),rgba(17,19,17,.6))}
+.livret::before{content:"";position:absolute;inset:8px;border:1px solid rgba(210,154,108,.14);pointer-events:none}
+.panneau{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.6rem,5vw,4rem);position:relative}
+.panneau[hidden]{display:none!important}
+.bloc{display:flex;flex-direction:column;gap:1.15rem;min-width:0}
+.bloc h3{font-size:1rem;letter-spacing:.24em;color:var(--cuivre-clair);display:flex;align-items:center;gap:.8rem}
+.bloc h3::after{content:"";flex:1;height:1px;background:var(--trait)}
+.bloc .note{font-family:var(--f-italique);font-style:italic;color:var(--doux);font-size:1.05rem;margin-top:-.5rem}
+.ligne-carte{display:flex;flex-direction:column;gap:.2rem}
+.ligne-carte .l{display:flex;align-items:baseline;gap:.5rem}
+.ligne-carte .n{font-weight:500;color:var(--creme);font-size:1rem}
+.ligne-carte .pts{flex:1;border-bottom:1px dotted rgba(210,154,108,.45);transform:translateY(-4px);min-width:16px}
+.ligne-carte .p{font:500 .98rem/1 var(--f-display);color:var(--cuivre-clair);white-space:nowrap;font-variant-numeric:tabular-nums}
+.ligne-carte .d{font-size:.86rem;color:var(--doux);line-height:1.45;max-width:46ch}
+.panneau .deco{grid-column:1/-1;display:flex;justify-content:center;margin-top:.6rem}
+.panneau .deco img{width:min(340px,70%);opacity:.75}
+.formules{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.formule{border:1px solid var(--trait);padding:1.3rem 1rem;text-align:center;display:flex;flex-direction:column;gap:.5rem;align-items:center;background:rgba(11,11,11,.4)}
+.formule b{font:500 .8rem/1.4 var(--f-display);letter-spacing:.16em;color:var(--creme)}
+.formule small{font-size:.78rem;color:var(--doux)}
+.formule span{font:500 1.6rem/1 var(--f-display);margin-top:.2rem}
+@media (max-width:760px){.panneau{grid-template-columns:1fr}.formules{grid-template-columns:1fr}}
+.pdf-note{text-align:center;margin-top:1.8rem;color:var(--doux);font-size:.86rem}
+
+/* Brunch */
+.brunch{background:var(--vert);overflow:hidden}
+.brunch::after{content:"";position:absolute;inset:0;background:
+  radial-gradient(circle at 15% 20%,rgba(238,189,147,.08),transparent 40%),
+  radial-gradient(circle at 85% 80%,rgba(11,11,11,.4),transparent 50%);pointer-events:none}
+.brunch .wrap{position:relative;z-index:1}
+.brunch-top{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,5vw,4rem);align-items:center;margin-bottom:3rem}
+.brunch-top .txt{display:flex;flex-direction:column;gap:1.2rem;min-width:0}
+.brunch-top h2{font-size:clamp(2rem,5vw,3.4rem);line-height:1.1}
+.brunch-top .lead{font-family:var(--f-italique);font-style:italic;font-size:1.4rem;color:var(--creme)}
+.brunch-top p{color:rgba(243,237,228,.78);max-width:48ch}
+.badge-we{display:inline-flex;align-self:flex-start;gap:.6rem;align-items:center;border:1px solid rgba(238,189,147,.5);padding:.55rem .9rem;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--cuivre-clair)}
+.brunch-photo{position:relative;min-width:0}
+.brunch-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;border:1px solid rgba(238,189,147,.35)}
+.brunch-photo::before{content:"";position:absolute;inset:-12px 12px 12px -12px;border:1px solid rgba(238,189,147,.3);z-index:-1}
+.brunchs{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.br{background:rgba(11,11,11,.55);border:1px solid rgba(238,189,147,.22);display:flex;flex-direction:column;min-width:0}
+.br img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.br .c{padding:1.3rem 1.3rem 1.5rem;display:flex;flex-direction:column;gap:.8rem;flex:1}
+.br .h{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+.br h3{font-size:1.02rem;letter-spacing:.16em;color:var(--creme)}
+.br .px{font:500 1.35rem/1 var(--f-display);white-space:nowrap}
+.br .t{font-family:var(--f-italique);font-style:italic;color:var(--cuivre-clair);font-size:1.08rem;margin-top:-.4rem}
+.br ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.35rem;font-size:.9rem;color:rgba(243,237,228,.82)}
+.br li{display:flex;gap:.6rem}
+.br li::before{content:"";width:5px;height:5px;background:var(--emeraude);transform:rotate(45deg) translateY(9px);flex:none;outline:1px solid rgba(238,189,147,.5)}
+@media (max-width:900px){.brunch-top{grid-template-columns:1fr}.brunchs{grid-template-columns:1fr}.br{display:grid;grid-template-columns:42% 1fr}.br img{height:100%;aspect-ratio:auto}}
+@media (max-width:520px){.br{display:flex}.br img{aspect-ratio:16/10}}
+
+/* Passeport */
+.passeport{background:var(--noir);text-align:center;overflow:hidden}
+.passeport .carnet{position:relative;max-width:760px;margin:0 auto;padding:clamp(2.4rem,6vw,4rem) clamp(1.2rem,5vw,3.5rem);border:1px solid var(--trait);background:radial-gradient(120% 120% at 50% 0%,rgba(29,59,47,.55),rgba(11,11,11,.2))}
+.passeport .carnet::before{content:"";position:absolute;inset:8px;border:1px dashed rgba(210,154,108,.25);pointer-events:none}
+.passeport .ar{font:500 clamp(2rem,6vw,3rem)/1.2 "Noto Naskh Arabic","Geeza Pro","Arial",serif;margin-bottom:.4rem}
+.passeport h2{font-size:clamp(1.5rem,4vw,2.4rem);margin:.6rem 0 1rem}
+.passeport p{color:var(--doux);max-width:52ch;margin:0 auto}
+.tampons{display:flex;justify-content:center;gap:clamp(.6rem,3vw,1.6rem);flex-wrap:wrap;margin-top:2rem}
+.tampon{width:108px;height:108px;border-radius:50%;border:1.5px solid var(--cuivre);display:grid;place-items:center;text-align:center;font:500 .6rem/1.35 var(--f-texte);letter-spacing:.16em;text-transform:uppercase;color:var(--cuivre-clair);transform:rotate(var(--r,-8deg));position:relative;padding:.6rem}
+.tampon::before{content:"";position:absolute;inset:5px;border-radius:50%;border:1px dashed rgba(210,154,108,.5)}
+.tampon b{display:block;font:600 .95rem/1.1 var(--f-display);letter-spacing:.08em;margin:.2rem 0}
+.tampon.vert{border-color:var(--emeraude);color:#9fd1b0}
+.tampon.vert::before{border-color:rgba(56,118,77,.7)}
+
+/* Infos */
+.infos{background:linear-gradient(180deg,var(--noir),#0d1310)}
+.infos-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.carte-info{border:1px solid var(--trait);background:var(--nuit);padding:clamp(1.4rem,4vw,2.2rem);display:flex;flex-direction:column;gap:1.1rem;min-width:0}
+.carte-info h3{font-size:1rem;letter-spacing:.24em;color:var(--cuivre-clair)}
+.carte-info .gros{font-size:1.15rem;color:var(--creme);line-height:1.5}
+.carte-info .gros a{text-decoration:none}
+.carte-info .actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:auto}
+table.horaires{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.horaires td{padding:.62rem 0;border-bottom:1px solid rgba(210,154,108,.14);font-size:.96rem}
+.horaires td:last-child{text-align:right;color:var(--creme);white-space:nowrap}
+@media (max-width:420px){.horaires td{font-size:.86rem}.horaires tr.auj td:first-child::after{display:none}}
+.horaires tr.auj td{color:var(--cuivre-clair);font-weight:500}
+.horaires tr.auj td:first-child::after{content:"Aujourd'hui";margin-left:.6rem;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--cuivre);padding:.2rem .4rem;vertical-align:middle}
+.a-confirmer{font-size:.8rem;color:var(--doux);font-style:italic}
+.plan{grid-column:1/-1;position:relative;min-height:300px;border:1px solid var(--trait);overflow:hidden;display:flex;align-items:flex-end;text-decoration:none;background:var(--vert)}
+.plan img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35;mix-blend-mode:luminosity}
+.plan .pin{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:.6rem}
+.plan .pin .losange{width:64px;height:64px;background:rgba(11,11,11,.8)}
+.plan .pin .losange::before{inset:10px}
+.plan .pin span{font:500 .72rem/1 var(--f-texte);letter-spacing:.24em;text-transform:uppercase;background:rgba(11,11,11,.85);padding:.5rem .8rem;border:1px solid var(--trait)}
+.plan .bas{position:relative;width:100%;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding:1.2rem 1.4rem;background:linear-gradient(transparent,rgba(11,11,11,.9))}
+.plan .bas p{color:var(--creme)}
+@media (max-width:760px){.infos-grid{grid-template-columns:1fr}}
+
+/* Pied */
+footer{border-top:1px solid var(--trait);padding-block:3rem 7rem;text-align:center}
+footer .wrap{display:flex;flex-direction:column;align-items:center;gap:1.1rem}
+footer .sig{font-family:var(--f-italique);font-style:italic;font-size:1.3rem;color:var(--creme)}
+footer small{color:var(--doux);font-size:.78rem;letter-spacing:.08em}
+@media (min-width:761px){footer{padding-bottom:3rem}}
+
+/* Barre mobile */
+.barre{position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;grid-template-columns:repeat(3,1fr);background:rgba(11,11,11,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--trait);padding:0 env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+.barre a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;min-height:62px;font:500 .64rem/1 var(--f-texte);letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--texte)}
+.barre a + a{border-left:1px solid rgba(210,154,108,.15)}
+.barre a.cta{color:var(--cuivre-clair)}
+.barre svg{width:20px;height:20px}
+@media (max-width:760px){.barre{display:grid}}
+
+/* Apparition */
+.reveal{transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.js .reveal.pre{opacity:.001;transform:translateY(24px)}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.reveal{transition:none}.js .reveal.pre{opacity:1;transform:none}.scroll-hint i{animation:none}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-tel" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="i-horloge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/><path fill="none" stroke="currentColor" stroke-width="1.5" d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-carte" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" d="M5 3h11l3 3v15H5z M8 9h8 M8 13h8 M8 17h5"/></symbol>
+    <symbol id="i-tajine" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" d="M12 3v2M7.5 15 11 5h2l3.5 10M4 15h16M5 15c0 3 3 4 7 4s7-1 7-4"/></symbol>
+  </defs>
+</svg>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="marque" href="#accueil" aria-label="Medina, retour en haut">
+      <span class="losange" aria-hidden="true"><i></i><i></i><i></i><i></i><b>M</b></span>
+      <div><span class="cuivre">MEDINA</span><small>RESTAURANT MAROCAIN</small></div>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#carte">La carte</a>
+      <a href="#brunch">Brunch</a>
+      <a href="#infos">Horaires &amp; accès</a>
+      <a class="btn plein" href="#infos" data-tel-link><svg><use href="#i-tel"/></svg>Réserver</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="accueil" aria-label="Bienvenue chez Medina">
+  <div class="hero-sticky">
+    <img class="poster" src="img/hero-poster.jpg" alt="Tajine, couscous royal et thé à la menthe sur une table en zellige vert, dans un riad éclairé par des lanternes.">
+    <canvas id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="voile"></div>
+    <div class="dim" id="heroDim"></div>
+    <div class="hero-txt" id="heroTxt">
+      <img class="hero-logo" src="img/logo-m.webp" alt="" width="150" height="150">
+      <h1 class="cuivre">MEDINA</h1>
+      <p class="sous">Restaurant marocain · Gaillac</p>
+      <p class="accroche">L'authenticité du Maroc, la générosité dans l'assiette.</p>
+      <div class="ctas">
+        <a class="btn plein" href="#carte"><svg><use href="#i-carte"/></svg>Voir la carte</a>
+        <a class="btn ligne" href="#infos"><svg><use href="#i-pin"/></svg>Nous trouver</a>
+      </div>
+    </div>
+    <div class="fin" id="heroFin" aria-hidden="true"><p>Le tajine est servi.</p><span>Place du Griffoul · Gaillac</span></div>
+    <div class="scroll-hint" id="hint" aria-hidden="true"><i></i>Faites défiler</div>
+    <div class="progress" aria-hidden="true"><b id="heroBar"></b></div>
+  </div>
+</section>
+
+<div class="express" aria-label="Infos pratiques">
+  <div class="wrap">
+    <a class="it" href="#infos">
+      <svg><use href="#i-horloge"/></svg>
+      <div><h3>Aujourd'hui</h3><p id="expressHeures">—</p></div>
+    </a>
+    <a class="it" href="" data-maps target="_blank" rel="noopener">
+      <svg><use href="#i-pin"/></svg>
+      <div><h3>Adresse</h3><p>Place du Griffoul<br><small>81600 Gaillac</small></p></div>
+    </a>
+    <a class="it" href="#infos" data-tel-link>
+      <svg><use href="#i-tel"/></svg>
+      <div><h3>Réservation</h3><p data-tel-texte>—</p></div>
+    </a>
+    <a class="it" href="#carte">
+      <svg><use href="#i-tajine"/></svg>
+      <div><h3>Formule du midi</h3><p>dès 14,90 €<br><small>du mercredi au vendredi midi</small></p></div>
+    </a>
+  </div>
+</div>
+
+<section class="sec histoire" aria-labelledby="h-histoire">
+  <div class="wrap">
+    <div class="txt reveal">
+      <p class="eyebrow left">Place du Griffoul</p>
+      <h2 id="h-histoire">Un petit bout de Marrakech <span class="cuivre">au cœur de Gaillac</span></h2>
+      <p class="lead">Semoule roulée, tajines mijotés, brochettes grillées à la minute et thé à la menthe servi de haut.</p>
+      <p>Chez Medina, on cuisine comme à la maison : couscous du vendredi tous les jours, tanjia de Marrakech longuement mijotée, pastilla feuilletée au poulet et aux amandes. Le pain marocain est offert, le thé à la menthe peu sucré coule à volonté, et du vendredi au dimanche la table se couvre de msemen, baghrir et harcha pour le brunch.</p>
+      <div class="chiffres">
+        <div><b class="cuivre">5</b><span>couscous maison</span></div>
+        <div><b class="cuivre">4</b><span>tajines</span></div>
+        <div><b class="cuivre">4,7★</b><span>sur Google</span></div>
+      </div>
+    </div>
+    <div class="gravure reveal"><img src="img/tajine-gravure.webp" alt="Gravure d'un tajine fumant, pain marocain et olives" loading="lazy"></div>
+  </div>
+</section>
+
+<section class="sec signatures" aria-labelledby="h-sig">
+  <div class="wrap">
+    <div class="tete reveal">
+      <p class="eyebrow">Les incontournables</p>
+      <h2 id="h-sig">Nos <span class="cuivre">signatures</span></h2>
+      <p>Les plats qu'on vient chercher de tout le Tarn.</p>
+    </div>
+    <div class="rail" id="rail"></div>
+    <p class="rail-hint">Glissez pour voir les plats →</p>
+  </div>
+</section>
+
+<section class="sec carte" id="carte" aria-labelledby="h-carte">
+  <div class="wrap">
+    <div class="tete reveal">
+      <p class="eyebrow">Notre carte</p>
+      <h2 id="h-carte" class="cuivre">LA CARTE</h2>
+      <p>Tout est fait maison. Le pain marocain est offert avec chaque plat.</p>
+    </div>
+  </div>
+  <div class="onglets" role="tablist" aria-label="Rubriques de la carte"><div class="wrap" id="onglets"></div></div>
+  <div class="wrap">
+    <div class="livret" id="livret"></div>
+    <p class="pdf-note">Prix TTC, service compris. La suggestion du moment et le burger du chef sont à l'ardoise.</p>
+  </div>
+</section>
+
+<section class="sec brunch" id="brunch" aria-labelledby="h-brunch">
+  <div class="wrap">
+    <div class="brunch-top">
+      <div class="txt reveal">
+        <span class="badge-we">Vendredi, samedi &amp; dimanche · 10h – 14h30</span>
+        <h2 id="h-brunch">BRUNCH <span class="cuivre">MAROCAIN</span></h2>
+        <p class="lead">Tradition · saveurs · fait maison</p>
+        <p>Msemen feuilleté, baghrir aux mille trous, harcha dorée, miel, amlou et jus d'orange pressé. Un moment gourmand aux saveurs du Maroc, à partager sans se presser.</p>
+        <div><a class="btn plein" href="#infos" data-tel-link><svg><use href="#i-tel"/></svg>Réserver ma table</a></div>
+      </div>
+      <div class="brunch-photo reveal"><img src="img/brunch.jpg" alt="Table de brunch marocain : msemen, baghrir, œufs au plat, olives et jus d'orange" loading="lazy"></div>
+    </div>
+    <div class="brunchs" id="brunchs"></div>
+  </div>
+</section>
+
+<section class="sec passeport" aria-labelledby="h-pass">
+  <div class="wrap">
+    <div class="carnet reveal">
+      <p class="ar cuivre" lang="ar" dir="rtl">مطعم المدينة</p>
+      <p class="eyebrow">Passeport · Passport</p>
+      <h2 id="h-pass">Votre passeport pour le Maroc</h2>
+      <p>Pas besoin de billet d'avion : de la harira du soir au thé à la menthe, chaque table de Medina est une escale. Faites tamponner votre passeport.</p>
+      <div class="tampons" aria-hidden="true">
+        <div class="tampon" style="--r:-10deg">Escale<b>Marrakech</b>Tanjia</div>
+        <div class="tampon vert" style="--r:6deg">Escale<b>Fès</b>Pastilla</div>
+        <div class="tampon" style="--r:-4deg">Escale<b>Rabat</b>Couscous</div>
+        <div class="tampon vert" style="--r:9deg">Arrivée<b>Gaillac</b>81600</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec infos" id="infos" aria-labelledby="h-infos">
+  <div class="wrap">
+    <div class="tete reveal">
+      <p class="eyebrow">Venir chez Medina</p>
+      <h2 id="h-infos">Horaires <span class="cuivre">&amp;</span> accès</h2>
+    </div>
+    <div class="infos-grid">
+      <div class="carte-info reveal">
+        <h3>HORAIRES</h3>
+        <table class="horaires" id="horaires"><tbody></tbody></table>
+        <p class="a-confirmer" id="horairesNote"></p>
+      </div>
+      <div class="carte-info reveal">
+        <h3>ADRESSE &amp; CONTACT</h3>
+        <p class="gros">Medina, restaurant marocain<br>34 place du Griffoul<br>81600 Gaillac</p>
+        <p class="gros"><a data-tel-link href="#infos"><span data-tel-texte>—</span></a></p>
+        <p style="color:var(--doux)">Fermé le lundi et le mardi. Formule du midi en semaine, brunch marocain du vendredi au dimanche de 10h à 14h30.</p>
+        <div class="actions">
+          <a class="btn plein" data-tel-link href="#infos"><svg><use href="#i-tel"/></svg>Appeler</a>
+          <a class="btn ligne" data-maps href="" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg>Itinéraire</a>
+        </div>
+      </div>
+      <a class="plan reveal" data-maps href="" target="_blank" rel="noopener" aria-label="Ouvrir l'itinéraire dans Google Maps">
+        <img src="img/skyline.webp" alt="" loading="lazy">
+        <div class="pin"><span class="losange" aria-hidden="true"><i></i><i></i><i></i><i></i><b>M</b></span><span>Place du Griffoul</span></div>
+        <div class="bas"><p>Au centre historique de Gaillac, à deux pas de l'abbaye Saint-Michel.</p><span class="btn ligne">Ouvrir dans Google Maps</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="img/logo-m.webp" alt="Medina" width="72" height="72" loading="lazy">
+    <p class="sig">L'authenticité du Maroc, la générosité dans l'assiette.</p>
+    <small>Medina · Restaurant marocain · Place du Griffoul, 81600 Gaillac</small>
+    <small>Photos d'illustration. L'abus d'alcool est dangereux pour la santé, à consommer avec modération.</small>
+  </div>
+</footer>
+
+<nav class="barre" aria-label="Actions rapides">
+  <a href="#infos" data-tel-link><svg><use href="#i-tel"/></svg>Appeler</a>
+  <a href="" data-maps target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg>Itinéraire</a>
+  <a class="cta" href="#carte"><svg><use href="#i-carte"/></svg>La carte</a>
+</nav>
+
+<script>window.__frames = ["frames/f0001.webp", "frames/f0002.webp", "frames/f0003.webp", "frames/f0004.webp", "frames/f0005.webp", "frames/f0006.webp", "frames/f0007.webp", "frames/f0008.webp", "frames/f0009.webp", "frames/f0010.webp", "frames/f0011.webp", "frames/f0012.webp", "frames/f0013.webp", "frames/f0014.webp", "frames/f0015.webp", "frames/f0016.webp", "frames/f0017.webp", "frames/f0018.webp", "frames/f0019.webp", "frames/f0020.webp", "frames/f0021.webp", "frames/f0022.webp", "frames/f0023.webp", "frames/f0024.webp", "frames/f0025.webp", "frames/f0026.webp", "frames/f0027.webp", "frames/f0028.webp", "frames/f0029.webp", "frames/f0030.webp", "frames/f0031.webp", "frames/f0032.webp", "frames/f0033.webp", "frames/f0034.webp", "frames/f0035.webp", "frames/f0036.webp", "frames/f0037.webp", "frames/f0038.webp", "frames/f0039.webp", "frames/f0040.webp", "frames/f0041.webp", "frames/f0042.webp", "frames/f0043.webp", "frames/f0044.webp", "frames/f0045.webp", "frames/f0046.webp", "frames/f0047.webp", "frames/f0048.webp", "frames/f0049.webp", "frames/f0050.webp", "frames/f0051.webp", "frames/f0052.webp", "frames/f0053.webp", "frames/f0054.webp", "frames/f0055.webp", "frames/f0056.webp", "frames/f0057.webp", "frames/f0058.webp", "frames/f0059.webp", "frames/f0060.webp", "frames/f0061.webp", "frames/f0062.webp", "frames/f0063.webp", "frames/f0064.webp", "frames/f0065.webp", "frames/f0066.webp", "frames/f0067.webp", "frames/f0068.webp", "frames/f0069.webp", "frames/f0070.webp", "frames/f0071.webp", "frames/f0072.webp", "frames/f0073.webp", "frames/f0074.webp", "frames/f0075.webp", "frames/f0076.webp", "frames/f0077.webp", "frames/f0078.webp", "frames/f0079.webp", "frames/f0080.webp", "frames/f0081.webp", "frames/f0082.webp", "frames/f0083.webp", "frames/f0084.webp", "frames/f0085.webp", "frames/f0086.webp", "frames/f0087.webp", "frames/f0088.webp", "frames/f0089.webp", "frames/f0090.webp", "frames/f0091.webp", "frames/f0092.webp", "frames/f0093.webp", "frames/f0094.webp", "frames/f0095.webp", "frames/f0096.webp", "frames/f0097.webp", "frames/f0098.webp", "frames/f0099.webp", "frames/f0100.webp", "frames/f0101.webp", "frames/f0102.webp", "frames/f0103.webp", "frames/f0104.webp", "frames/f0105.webp", "frames/f0106.webp", "frames/f0107.webp", "frames/f0108.webp", "frames/f0109.webp", "frames/f0110.webp", "frames/f0111.webp", "frames/f0112.webp", "frames/f0113.webp", "frames/f0114.webp", "frames/f0115.webp", "frames/f0116.webp", "frames/f0117.webp", "frames/f0118.webp", "frames/f0119.webp", "frames/f0120.webp", "frames/f0121.webp"];</script>
+<script>
+document.documentElement.classList.add('js');
+
+/* ====== Infos du restaurant : à modifier ici ====== */
+const INFO = {
+  tel: '09 62 41 84 47',
+  maps: 'https://maps.app.goo.gl/Rs2PU78xpuSnbHfc9',
+  /* 0 = dimanche ... 6 = samedi ; [] = fermé (source : fiche Google, 26/11/2026) */
+  horaires: {
+    1: [],
+    2: [],
+    3: [['11:30','14:30'],['18:30','22:30']],
+    4: [['11:30','14:00'],['18:30','22:30']],
+    5: [['10:00','14:30'],['18:30','22:30']],
+    6: [['10:00','14:30'],['18:30','22:30']],
+    0: [['10:00','14:30'],['18:30','22:30']]
+  },
+  horairesConfirmes: true
+};
+
+/* ====== La carte (menu V7) ====== */
+const CARTE = [
+  {id:'entrees', nom:'Entrées', blocs:[
+    {t:'Pour commencer', items:[
+      ['Harira traditionnelle','6,00','Soupe marocaine aux lentilles, pois chiches et tomates.'],
+      ['Bissara','6,50','Soupe de fèves sèches, huile d’olive et cumin.'],
+      ['Briouates (3 pièces)','7,50','Feuilletés croustillants au choix.']]},
+    {t:'Salades', items:[
+      ['Zaalouk','7,50','Caviar d’aubergine aux tomates, ail et épices marocaines.'],
+      ['Salade marocaine','6,50','Tomates, concombres, oignons et herbes fraîches.'],
+      ['Assortiment de salades marocaines','12,50','Zaalouk et salade marocaine.']]}
+  ], deco:'skyline'},
+  {id:'couscous', nom:'Couscous & tajines', blocs:[
+    {t:'Couscous maison', note:'Semoule fine, légumes de saison et bouillon parfumé.', items:[
+      ['Végétarien','14,50'],['Poulet','15,90'],['Merguez','16,90'],['Veau','18,90'],['Royal','21,90']]},
+    {t:'Tajines traditionnels', note:'Servis avec du pain marocain.', items:[
+      ['Poulet, citron confit & olives','15,90','Servi avec des frites.'],
+      ['Berbère kefta & œufs','15,90'],
+      ['Veau, pruneaux & amandes','17,90'],
+      ['Végétarien','14,90','Tomates, petits pois et pommes de terre.']]}
+  ], deco:'couscous-gravure'},
+  {id:'grillades', nom:'Grillades & spécialités', blocs:[
+    {t:'Brochettes grillées à la minute', note:'Marinées aux épices marocaines. Deux accompagnements au choix inclus.', items:[
+      ['Poulet','15,90'],['Merguez','15,90'],['Kefta','14,90'],['Agneau','16,90'],['Assiette mixte','19,90']]},
+    {t:'Spécialités marocaines', items:[
+      ['Tanjia marrakchia','18,90','Spécialité de Marrakech longuement mijotée, servie avec des frites.'],
+      ['Pastilla au poulet & amandes','16,90','Feuilletage croustillant, poulet parfumé, amandes et cannelle.']]},
+    {t:'Accompagnements', note:'Deux au choix inclus avec les brochettes, sinon à la carte.', items:[
+      ['Frites maison','4,00'],['Salade marocaine','4,00'],['Semoule','4,00'],['Riz aux légumes','4,00'],['Pain marocain','offert']]}
+  ]},
+  {id:'burgers', nom:'Burgers & enfants', blocs:[
+    {t:'Burgers marocains', note:'Tous servis avec des frites maison.', items:[
+      ['Médina','13,90','Kefta épicée, fromage, oignons confits & sauce maison.'],
+      ['Marrakech','14,90','Bœuf grillé, oignons confits, fromage & sauce maison.'],
+      ['Burger du moment','ardoise','Une création du chef, renouvelée selon son inspiration.']]},
+    {t:'Le petit marocain', note:'Accompagnement et boisson inclus.', items:[
+      ['Mini brochettes de poulet','9,90'],['Mini burger','9,90']]}
+  ], deco:'caravane'},
+  {id:'midi', nom:'Formule du midi', special:'midi'},
+  {id:'boissons', nom:'Boissons', blocs:[
+    {t:'Sans alcool', items:[
+      ['Thé à la menthe','3,00'],
+      ['Lben','3,50','Lait fermenté traditionnel, frais et légèrement acidulé.'],
+      ['Raïb','3,50','Yaourt marocain traditionnel.'],
+      ['Jus d’orange frais','4,50'],
+      ['Coca-Cola, Coca-Cola Zero, Fanta, Orangina','3,90'],
+      ['Ice Tea, Oasis Tropical, Sprite','3,90'],
+      ['Eau plate 50 cl · 1 L','2,00 · 4,00'],
+      ['Eau gazeuse 50 cl · 1 L','2,50 · 4,50']]},
+    {t:'Avec alcool', note:'À consommer avec modération.', items:[
+      ['Vin rouge, blanc ou rosé, le verre','4,00'],
+      ['Vin, la bouteille 75 cl','15,00'],
+      ['Bière','4,00']]},
+    {t:'Boissons chaudes', items:[
+      ['Café · Espresso','2,00'],['Café au lait','2,50'],['Double espresso','3,00'],['Thé','3,00'],
+      ['Cappuccino · Chocolat chaud · Latte macchiato','3,50'],['Infusion maison · Chocolat viennois','4,00']]},
+    {t:'Pâtisseries marocaines', items:[
+      ['Pâtisserie du moment','2,50','La pièce.'],['Assortiment de pâtisseries','9,00']]}
+  ], deco:'the-gravure'}
+];
+const MIDI = {
+  plats:[['Couscous poulet','13,90'],['Couscous végétarien','12,90'],['Couscous merguez','13,90'],['Couscous royal','17,90'],['Tajine poulet','13,90'],['Tajine berbère','13,90']],
+  formules:[['Plat + dessert','1 thé + 1 pâtisserie','14,90'],['Entrée + plat','','15,90'],['Entrée · plat · dessert','1 thé + 1 pâtisserie','18,90']]
+};
+const SIGNATURES = [
+  ['couscous','Couscous maison','Couscous royal','Agneau, poulet, merguez, légumes de saison et bouillon parfumé.','21,90'],
+  ['tajine','Tajine','Poulet, citron confit & olives','Mijoté doucement, servi avec des frites et du pain marocain.','15,90'],
+  ['tanjia','Spécialité de Marrakech','Tanjia marrakchia','Viande confite des heures durant dans sa jarre en terre.','18,90'],
+  ['pastilla','Spécialité','Pastilla poulet & amandes','Feuilletage croustillant, cannelle et sucre glace.','16,90'],
+  ['brochettes','Grillé à la minute','Assiette mixte','Poulet, agneau, kefta et merguez, deux accompagnements.','19,90'],
+  ['harira','Pour commencer','Harira & briouates','La soupe du soir, lentilles et pois chiches, feuilletés croustillants.','6,00'],
+  ['burger','Burger marocain','Le Médina','Kefta épicée, fromage, oignons confits et sauce maison.','13,90'],
+  ['the','Pour finir','Thé à la menthe','Servi de haut, avec une pâtisserie marocaine du moment.','3,00']
+];
+const BRUNCHS = [
+  ['brunch-authentique','Brunch authentique','12,90','Le matin en douceur',['2 œufs au plat ou brouillés','Msemen','Beurre & miel','Jus d’orange frais pressé','Une boisson chaude au choix']],
+  ['brunch-gourmand','Brunch gourmand','14,90','Le plaisir des saveurs marocaines',['Msemen, baghrir & harcha','Beurre, miel & amlou','2 œufs au plat ou brouillés','Jus d’orange frais pressé','Une boisson chaude au choix']],
+  ['brunch-medina','Brunch Médina','16,90','L’authentique et généreux',['2 œufs au plat au khli (viande séchée)','Msemen & harcha','Harira & petite salade marocaine','Beurre, miel & Vache qui rit','Jus d’orange pressé + boisson chaude']]
+];
+
+const IMG = window.IMG || (p => p);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const prix = p => /\d/.test(p) && !/€/.test(p) ? p.split(' · ').map(x => x + ' €').join(' · ') : p;
+
+/* Signatures */
+document.getElementById('rail').innerHTML = SIGNATURES.map(([img,cat,nom,desc,p]) => `
+  <article class="plat reveal">
+    <figure><img src="${IMG('img/'+img+'.jpg')}" alt="${esc(nom)}" loading="lazy"></figure>
+    <div class="info"><span class="cat">${esc(cat)}</span><h3>${esc(nom)}</h3>
+      <div class="ligne"><p>${esc(desc)}</p><span class="prix cuivre">${prix(p)}</span></div></div>
+  </article>`).join('');
+
+/* Carte à onglets */
+const ligne = ([n,p,d]) => `<div class="ligne-carte"><div class="l"><span class="n">${esc(n)}</span><span class="pts"></span><span class="p">${esc(prix(p))}</span></div>${d?`<p class="d">${esc(d)}</p>`:''}</div>`;
+function panneau(c){
+  if (c.special === 'midi') return `
+    <div class="bloc"><h3>Le plat du midi</h3><p class="note">En semaine le midi (mercredi, jeudi et vendredi), sauf jours fériés.</p>${MIDI.plats.map(ligne).join('')}</div>
+    <div class="bloc"><h3>Nos formules</h3>
+      <div class="formules">${MIDI.formules.map(([a,b,p]) => `<div class="formule"><b>${esc(a)}</b>${b?`<small>${esc(b)}</small>`:'<small>&nbsp;</small>'}<span class="cuivre">${p} €</span></div>`).join('')}</div>
+      <p class="note" style="margin-top:0">Couscous royal : + 3 € sur la formule.</p>
+      <h3 style="margin-top:.6rem">Suggestion du moment</h3>
+      <p class="note">Selon l’inspiration du chef et les produits de saison. Prix indiqué sur l’ardoise.</p>
+    </div>
+    <div class="deco"><img src="${IMG('img/couscous-gravure.webp')}" alt="" loading="lazy"></div>`;
+  return c.blocs.map(b => `<div class="bloc"><h3>${esc(b.t)}</h3>${b.note?`<p class="note">${esc(b.note)}</p>`:''}${b.items.map(ligne).join('')}</div>`).join('')
+    + (c.deco ? `<div class="deco"><img src="${IMG('img/'+c.deco+'.webp')}" alt="" loading="lazy"></div>` : '');
+}
+const ong = document.getElementById('onglets'), liv = document.getElementById('livret');
+ong.innerHTML = CARTE.map((c,i) => `<button role="tab" id="tab-${c.id}" aria-controls="p-${c.id}" aria-selected="${i===0}" tabindex="${i===0?0:-1}">${esc(c.nom)}</button>`).join('');
+liv.innerHTML = CARTE.map((c,i) => `<div class="panneau" role="tabpanel" id="p-${c.id}" aria-labelledby="tab-${c.id}" ${i?'hidden':''}>${panneau(c)}</div>`).join('');
+function choisir(id, focus){
+  ong.querySelectorAll('button').forEach(b => { const on = b.id === 'tab-'+id; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; if (on){ focus && b.focus(); b.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'}); } });
+  liv.querySelectorAll('.panneau').forEach(p => p.hidden = p.id !== 'p-'+id);
+  try { localStorage.setItem('medina-onglet', id); } catch(e) {}
+}
+ong.addEventListener('click', e => { const b = e.target.closest('button'); if (b) choisir(b.id.slice(4)); });
+ong.addEventListener('keydown', e => {
+  const bs = [...ong.querySelectorAll('button')], i = bs.indexOf(document.activeElement);
+  if (i < 0) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft'){ e.preventDefault(); const n = bs[(i + (e.key==='ArrowRight'?1:-1) + bs.length) % bs.length]; choisir(n.id.slice(4), true); }
+});
+try { const s = localStorage.getItem('medina-onglet'); if (s && CARTE.some(c => c.id === s)) choisir(s); } catch(e) {}
+
+/* Brunchs */
+document.getElementById('brunchs').innerHTML = BRUNCHS.map(([img,nom,p,t,l]) => `
+  <article class="br reveal"><img src="${IMG('img/'+img+'.jpg')}" alt="${esc(nom)}" loading="lazy">
+    <div class="c"><div class="h"><h3>${esc(nom.toUpperCase())}</h3><span class="px cuivre">${p} €</span></div>
+    <p class="t">${esc(t)}</p><ul>${l.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div></article>`).join('');
+
+/* Horaires */
+const JOURS = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+const fmt = h => h.replace(/:00$/,'h').replace(':','h');
+const plage = j => { const h = INFO.horaires[j]; return h && h.length ? h.map(([a,b]) => fmt(a)+' – '+fmt(b)).join(' · ') : 'Fermé'; };
+const auj = new Date().getDay();
+document.querySelector('#horaires tbody').innerHTML = [1,2,3,4,5,6,0].map(j => `<tr class="${j===auj?'auj':''}"><td>${JOURS[j]}</td><td>${plage(j)}</td></tr>`).join('');
+document.getElementById('horairesNote').textContent = INFO.horairesConfirmes ? '' : 'Horaires indicatifs, à confirmer auprès du restaurant.';
+(function etat(){
+  const now = new Date(), m = now.getHours()*60 + now.getMinutes(), h = INFO.horaires[auj] || [];
+  const toM = s => { const [a,b] = s.split(':'); return +a*60 + +b; };
+  const ouvert = h.some(([a,b]) => m >= toM(a) && m < toM(b));
+  const ensuite = h.find(([a]) => toM(a) > m);
+  const el = document.getElementById('expressHeures');
+  el.innerHTML = ouvert ? `<span class="ouvert">Ouvert</span><br><small>${plage(auj)}</small>`
+    : `<span class="ouvert" style="--pastille:#c98b5e">${ensuite ? 'Ouvre à ' + fmt(ensuite[0]) : 'Fermé'}</span><br><small>${plage(auj)}</small>`;
+})();
+
+/* Téléphone & itinéraire */
+document.querySelectorAll('[data-maps]').forEach(a => a.href = INFO.maps);
+document.querySelectorAll('[data-tel-texte]').forEach(s => s.textContent = INFO.tel || 'Téléphone sur la fiche Google');
+if (INFO.tel) document.querySelectorAll('[data-tel-link]').forEach(a => a.href = 'tel:' + INFO.tel.replace(/\s/g,''));
+
+/* En-tête */
+const top_ = document.getElementById('top');
+const onScroll = () => top_.classList.toggle('solide', scrollY > innerHeight * .6);
+addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+/* Apparitions */
+if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.remove('pre'); io.unobserve(e.target); } }), {rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el => { const r = el.getBoundingClientRect(); if (r.top > innerHeight){ el.classList.add('pre'); io.observe(el); } });
+}
+
+/* Hero : vidéo image par image au scroll */
+(function(){
+  const FR = window.__frames || [], N = FR.length;
+  const hero = document.querySelector('.hero'), cv = document.getElementById('heroCanvas'), ctx = cv.getContext('2d');
+  const dim = document.getElementById('heroDim'), txt = document.getElementById('heroTxt'), fin = document.getElementById('heroFin'), bar = document.getElementById('heroBar'), hint = document.getElementById('hint');
+  const imgs = new Array(N); let cur = -1, want = 0, loaded = 0;
+  function size(){ const d = Math.min(devicePixelRatio || 1, 2); cv.width = cv.clientWidth * d; cv.height = cv.clientHeight * d; cur = -1; draw(); }
+  function nearest(i){ for (let k = 0; k < N; k++){ for (const j of [i-k, i+k]) if (imgs[j] && imgs[j].complete && imgs[j].naturalWidth) return imgs[j]; } return null; }
+  function draw(){
+    if (!N) return;
+    const im = nearest(want); if (!im) return;
+    const W = cv.width, H = cv.height, s = Math.max(W / im.naturalWidth, H / im.naturalHeight);
+    const w = im.naturalWidth * s, h = im.naturalHeight * s;
+    ctx.drawImage(im, (W - w) / 2, (H - h) / 2, w, h); cur = want;
+  }
+  function load(i){ if (imgs[i] || i < 0 || i >= N) return; const im = new Image(); im.decoding = 'async'; im.onload = () => { loaded++; if (Math.abs(i - want) < 3) draw(); }; im.src = FR[i]; imgs[i] = im; }
+  // ordre de chargement : 1re image, puis grossier → fin
+  load(0); [8,4,2,1].forEach(step => { for (let i = 0; i < N; i += step) load(i); });
+  function onS(){
+    const r = hero.getBoundingClientRect(), tot = hero.offsetHeight - innerHeight;
+    const p = Math.min(1, Math.max(0, -r.top / tot));
+    want = Math.round(p * (N - 1)); if (want !== cur) requestAnimationFrame(draw);
+    txt.style.opacity = String(Math.max(0, 1 - p * 3.2));
+    dim.style.opacity = String(Math.max(0, 1 - p * 2.6));
+    txt.style.transform = `translateY(${-p * 80}px)`;
+    fin.style.opacity = String(Math.max(0, Math.min(1, (p - .78) * 6)));
+    hint.style.opacity = String(Math.max(0, 1 - p * 8));
+    bar.style.width = (p * 100) + '%';
+  }
+  if (!N){ cv.remove(); return; }
+  addEventListener('scroll', onS, {passive:true}); addEventListener('resize', size); size(); onS();
+})();
+</script>
+
+</body>
+</html>
