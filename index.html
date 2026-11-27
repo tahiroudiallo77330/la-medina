@@ -885,9 +885,13 @@ if (!window.gsap && 'IntersectionObserver' in window && !matchMedia('(prefers-re
 
 <script>
 (function(){
+  /* Toujours arriver en haut, sur la vidéo (le navigateur ne doit pas reprendre l'ancienne position) */
+  try { history.scrollRestoration = 'manual'; } catch(e) {}
+  const enHaut = () => { if (!location.hash || !document.querySelector(location.hash)) { scrollTo(0, 0); if (window.ScrollTrigger) ScrollTrigger.clearScrollMemory && ScrollTrigger.clearScrollMemory('manual'); } };
+  enHaut(); addEventListener('pageshow', enHaut); addEventListener('load', () => { enHaut(); setTimeout(enHaut, 60); });
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const intro = document.getElementById('intro');
-  const finIntro = () => { intro.classList.add('fini'); document.documentElement.classList.remove('intro-on'); };
+  const finIntro = () => { if (document.documentElement.classList.contains('intro-on')) enHaut(); intro.classList.add('fini'); document.documentElement.classList.remove('intro-on'); };
 
   /* Titre MEDINA en lettres */
   const h1 = document.querySelector('.hero h1');
